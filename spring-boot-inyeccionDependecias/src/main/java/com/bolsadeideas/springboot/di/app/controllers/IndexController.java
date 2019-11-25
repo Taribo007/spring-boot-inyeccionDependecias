@@ -1,6 +1,7 @@
 package com.bolsadeideas.springboot.di.app.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,17 +23,31 @@ public class IndexController {
 	//Con la anotacion @Autowired podemos inyectar el servicio. Ya no hace falta crear una instancia del objeto con new MiServicio
 	
 	@Autowired
+	//@Qualifier("miServicioPrincipal")//Va a inyectar "miServicioPrincipal", por tanto, el que queramos inyectar, lo tenemos que llamat asi (al simple o al vomplejo)
+	@Qualifier("miServicioSimple")
 	private IServicio servicio;
+
+	/*//En este caso, usamos el autowired para inyectar la informacion al servicio mediante el constructor
+	//Cunado se inyecta mediante el constructor, la etiqueta utowired se puede omitir
+	@Autowired
+	public IndexController(IServicio servicio) {
+		
+		this.servicio = servicio;
+	}*/
+
 
 	//Metodos
 	@GetMapping({"/","","/index"})
 	//@GetMapping()
 	public String index (Model model) {
-		
-		
 		model.addAttribute("objeto", servicio.operacion());
-		
 		
 		return "index";
 	}
+
+	/*//En este caso, usamos el autowired para inyectar la informacion al servicio mediante el metodo set
+	@Autowired
+	public void setServicio(IServicio servicio) {
+		this.servicio = servicio;
+	}*/
 }

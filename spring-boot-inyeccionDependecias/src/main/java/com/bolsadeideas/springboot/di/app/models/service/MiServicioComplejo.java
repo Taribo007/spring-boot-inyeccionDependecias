@@ -4,17 +4,15 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 //import org.springframework.stereotype.Service;
 
-//@Component("miServicioSimple")
-//@Primary
+//@Component("miServicioComplejo")
 //@Service //Generalmente esta anotacion se usa para trabajar con componentes de acceso a datos
-public class MiServicio implements IServicio{
+public class MiServicioComplejo implements IServicio{
 
 	//Metodos
 	@Override
 	public String operacion() {
 		
-		return "ejecuntando algun proceso simple..";
+		return "ejecuntando algun proceso complicado..";
 	}
-	
 	
 }
