@@ -6,6 +6,10 @@ public class ItemFactura {
 	private Integer cantidad;
 	
 	
+	public ItemFactura(Producto producto, Integer cantidad) {
+		this.producto = producto;
+		this.cantidad = cantidad;
+	}
 	public Producto getProducto() {
 		return producto;
 	}
