@@ -2,7 +2,11 @@ package com.bolsadeideas.springboot.di.app.models.domain;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +20,22 @@ public class Factura {
 	private Cliente cliente;
 	
 	@Autowired
+	//@Qualifier("itemsFacturaOficina")
 	private List<ItemFactura> items;
+	
+	//este metodo se ejecuta despues de crearse lass instancias de los objetos, y despues de inyectarse las dependecias
+	//por tanto ya tienen datos, los podemos cambair
+	
+	@PostConstruct
+	public void inicializar() {
+		cliente.setNombre(cliente.getNombre().concat(" ").concat(cliente.getApellido()));
+		descripcion=descripcion.concat(" del cliente: " ).concat(cliente.getNombre());
+	}
+	
+	@PreDestroy
+	public void destruir() {
+		System.out.println("Facura destruida: ".concat(descripcion));
+	}
 
 	public String getDescripcion() {
 		return descripcion;
